@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harish Rajendran - Quantum Computing Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #007bff; 
+            --secondary-color: #17a2b8; 
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --white-color: #ffffff;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition-speed: 0.3s;
+
+            /* Quantum-inspired theme colors */
+            --quantum-purple: #6f42c1; /* A deep purple */
+            --quantum-teal: #20c997;   /* A vibrant teal */
+            --quantum-glow: rgba(0, 123, 255, 0.3); /* Subtle glow effect */
+            --quantum-dark-bg: #1a1a2e; /* Dark background for contrast elements */
+            --quantum-light-accent: #e0e7ff; /* Light accent for text on dark */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--white-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+            /* Subtle animated particle background for the whole page */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.03) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 80% 70%, rgba(23, 162, 184, 0.03) 0.5px, transparent 0.5px);
+            background-size: 50px 50px, 70px 70px;
+            animation: moveParticles 60s linear infinite;
+        }
+
+        @keyframes moveParticles {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 1000px 500px, -500px 1000px; }
+        }
+
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background: rgba(255, 255, 255, 0.9); /* Slightly more transparent */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            color: var(--dark-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.6rem; /* Slightly larger */
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: 1px; /* Add some spacing */
+        }
+         nav .logo span { /* For "HR" styling if needed */
+            color: var(--quantum-teal);
+        }
+
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative; /* For underline animation */
+            transition: color var(--transition-speed) ease;
+        }
+        nav ul li a::after { /* Underline animation */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 3px;
+            right: 0;
+            background: var(--quantum-teal);
+            transition: width var(--transition-speed) ease;
+        }
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+            left: 0;
+            background: var(--primary-color);
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-color);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+
+        /* --- Hero Section --- */
+        #hero {
+            min-height: 100vh;
+            /* Animated Gradient Background */
+            background: linear-gradient(-45deg, var(--quantum-light-accent), var(--primary-color), var(--quantum-teal), var(--quantum-purple));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white-color); /* Text color changed for dark bg */
+            position: relative;
+            padding-top: 80px; 
+            overflow: hidden; /* For pseudo-elements */
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Optional: Add some abstract shapes or lines */
+        #hero::before, #hero::after {
+            content: '';
+            position: absolute;
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        #hero::before {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            top: 10%; left: 10%;
+            animation: pulseShape 8s infinite alternate;
+        }
+        #hero::after {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            bottom: 15%; right: 15%;
+            animation: pulseShape 10s infinite alternate-reverse;
+        }
+        @keyframes pulseShape {
+            from { transform: scale(0.8); opacity: 0.05; }
+            to { transform: scale(1.2); opacity: 0.15; }
+        }
+
+
+        #hero .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            position: relative; /* To be above pseudo-elements */
+            z-index: 1;
+        }
+
+        #hero #profile-photo {
+            width: 180px; /* Slightly smaller */
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--white-color); /* White border on dark bg */
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Darker shadow */
+            object-fit: cover; 
+        }
+
+        #hero h1 {
+            font-size: 3.2rem; /* Adjusted */
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--white-color); 
+        }
+
+        #hero .tagline {
+            font-size: 1.4rem; /* Adjusted */
+            margin-bottom: 1.5rem;
+            color: var(--quantum-light-accent); /* Lighter text on dark bg */
+            font-weight: 300;
+        }
+        
+        #hero .hero-profile {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            color: var(--quantum-light-accent);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--quantum-teal); /* Using quantum color */
+            color: var(--white-color);
+            padding: 0.9rem 2.2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            box-shadow: 0 4px 15px rgba(32, 201, 151, 0.4); /* Shadow for the new color */
+        }
+
+        .btn:hover {
+            background: #1aa07f; /* Darker teal */
+            transform: translateY(-3px) scale(1.05); /* Add scale effect */
+            box-shadow: 0 6px 20px rgba(32, 201, 151, 0.5);
+        }
+        
+        /* --- General Section Styling --- */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: rgba(255,255,255,0.8); /* Make sections slightly transparent to see body bg */
+            position: relative;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+        }
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--quantum-teal); /* Use quantum color for accent */
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Profile & Interest Areas --- */
+        #profile p, #interest-areas ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+        #interest-areas ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        #interest-areas li {
+            background: var(--quantum-light-accent); /* Light quantum accent */
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            color: var(--quantum-purple); /* Use quantum purple */
+            border: 1px solid var(--quantum-teal);
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        #interest-areas li:hover {
+            background: var(--quantum-teal);
+            color: var(--white-color);
+            transform: translateY(-4px) scale(1.05); /* Enhanced hover */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- Timeline (Experience, Education, Projects) --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline::after { 
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary-color);
+            opacity: 0.2; /* Softer line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 60px; 
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 60px; 
+        }
+        .timeline-item::after { /* Circles on the timeline */
+            content: '';
+            position: absolute;
+            width: 18px; /* Slightly smaller */
+            height: 18px;
+            right: -9px; /* Adjusted */
+            background-color: var(--white-color);
+            border: 4px solid var(--quantum-teal); /* Quantum color */
+            top: 28px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px var(--quantum-glow); /* Glow effect */
+        }
+        .timeline-item:nth-child(even)::after {
+            left: -9px; /* Adjusted */
+        }
+        .timeline-content {
+            padding: 25px; /* More padding */
+            background-color: var(--white-color);
+            position: relative;
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            border-left: 4px solid var(--primary-color); /* Accent border */
+        }
+        .timeline-content:hover {
+            transform: translateY(-6px) scale(1.02); /* Enhanced hover */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        .timeline-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        .timeline-content .meta {
+            font-size: 0.9rem;
+            color: #555; /* Slightly darker */
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+         .timeline-content .supervisors {
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        /* --- Skills --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .skill-category {
+            background: var(--white-color); /* Solid background */
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            border-top: 4px solid var(--quantum-teal); /* Top accent */
+        }
+        .skill-category:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .skill-category h4 {
+            color: var(--quantum-purple);
+            margin-top: 0;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #eee; /* Lighter border */
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .skill-category p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* --- Awards, Workshops, Languages --- */
+        #awards ul, #workshops ul, #languages ul {
+            list-style: none;
+            padding: 0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        #awards li, #workshops li, #languages li {
+            background: #fdfdff; /* Slightly off-white */
+            margin-bottom: 12px;
+            padding: 18px; /* More padding */
+            border-radius: 8px; /* More rounded */
+            border-left: 5px solid var(--quantum-purple); /* Quantum color */
+            font-size: 1.05rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+             transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #awards li:hover, #workshops li:hover, #languages li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        #languages li strong { color: var(--primary-color); }
+
+
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+            background: var(--light-color); 
+            padding-bottom: 100px; /* Extra padding for FAB */
+        }
+        #contact p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .linkedin-button {
+            display: inline-flex; 
+            align-items: center;
+            background-color: #0077b5; 
+            color: white;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+        }
+        .linkedin-button svg { 
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        .linkedin-button:hover {
+            background-color: #005582; 
+            transform: translateY(-3px) scale(1.03);
+        }
+        #contact .email-link {
+             display: block;
+             margin-top: 20px;
+             font-size: 1.1rem;
+             color: var(--primary-color);
+             text-decoration: none;
+        }
+        #contact .email-link:hover {
+            text-decoration: underline;
+            color: var(--quantum-teal);
+        }
+
+        /* --- Floating Action Button (FAB) --- */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1001;
+        }
+        .fab {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem; /* For "HR" or icon */
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            animation: pulseFab 2s infinite;
+        }
+        @keyframes pulseFab {
+            0% { box-shadow: 0 5px 15px rgba(0,123,255,0.2), 0 0 0 0 rgba(0,123,255,0.3); }
+            70% { box-shadow: 0 5px 15px rgba(0,123,255,0.2), 0 0 0 10px rgba(0,123,255,0); }
+            100% { box-shadow: 0 5px 15px rgba(0,123,255,0.2), 0 0 0 0 rgba(0,123,255,0); }
+        }
+
+        .fab:hover {
+            background-color: var(--quantum-teal);
+            transform: scale(1.1);
+            animation-play-state: paused; /* Pause pulse on hover */
+        }
+        .fab-options {
+            position: absolute;
+            bottom: 75px; /* Above the FAB */
+            right: 0;
+            background-color: var(--white-color);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            max-height: 0; /* Hidden by default */
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .fab-options.active {
+            max-height: 500px; /* Adjust as needed */
+            opacity: 1;
+        }
+        .fab-options a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: background-color 0.2s ease;
+            font-size: 0.95rem;
+        }
+        .fab-options a:hover {
+            background-color: var(--light-color);
+        }
+        .fab-options a svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            fill: var(--primary-color);
+        }
+        .fab-options .fab-hr { /* Styling for email/linkedin at the bottom */
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 5px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--quantum-dark-bg); /* Dark quantum bg */
+            color: var(--quantum-light-accent); /* Light text */
+            text-align: center;
+            padding: 30px 0; /* More padding */
+            margin-top: 0; 
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        
+        /* Animation: Fade in sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px); /* Increased effect */
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media(max-width: 768px) {
+            body { animation: none; } /* Disable body particle on mobile for performance */
+            nav .logo {
+                font-size: 1.3rem;
+            }
+            nav ul {
+                display: none; 
+                flex-direction: column;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(5px);
+                position: absolute;
+                top: 65px; 
+                left: 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 10px 0;
+            }
+            nav ul.active {
+                display: flex; 
+            }
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            .menu-toggle {
+                display: block; 
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            #hero .tagline {
+                font-size: 1.2rem;
+            }
+            #hero #profile-photo {
+                width: 140px; /* Smaller on mobile */
+                height: 140px;
+            }
+            #hero::before, #hero::after { display: none; } /* Hide hero shapes on mobile */
+
+
+            section h2 {
+                font-size: 2.2rem;
+            }
+
+            .timeline::after {
+                left: 15px; 
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px; 
+                padding-right: 10px;
+            }
+            .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+                left: 0; 
+                padding-left: 50px;
+            }
+            .timeline-item::after {
+                left: 5px; 
+            }
+            .skills-grid {
+                grid-template-columns: 1fr; 
+            }
+
+            .fab-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            .fab {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .fab-options {
+                bottom: 65px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">Harish <span>Rajendran</span></a>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact" class="contact-nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <!-- Hero content remains largely the same, but will benefit from new bg -->
+        <div class="hero-content fade-in-section">
+            <img src="profile.png" alt="Harish Rajendran" id="profile-photo">
+            <h1>HARISH RAJENDRAN</h1>
+            <p class="tagline">Quantum Computing Researcher | Physics & Algorithm Expert</p>
+            <p class="hero-profile">
+                Driving advancements in quantum algorithms with a strong physics foundation. Proven expertise in competitive challenges and scientific research, eager to shape the future of quantum technology.
+            </p>
+            <a href="#projects" class="btn">Explore My Work</a>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="fade-in-section">
+        <div class="container">
+            <h2>My Profile</h2>
+            <p>
+                A dedicated quantum computing enthusiast leveraging a robust Physics background to develop novel quantum algorithms. My work is characterized by a proven ability to excel in competitive challenges and contribute to significant scientific research. I am actively seeking opportunities to apply my skills to pioneering projects that push the boundaries of modern science and quantum computation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Interest Areas Section -->
+    <section id="interest-areas" class="fade-in-section">
+        <div class="container">
+            <h2>Core Interests</h2>
+            <ul>
+                <li>Quantum Algorithm Development</li>
+                <li>Quantum Chemistry Solutions</li>
+                <li>Advanced Quantum Simulation</li>
+                <li>Numerical Modeling & Optimization</li>
+                <li>Quantum Machine Learning</li>
+                <li>Quantum Architecture</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Sections: Experience, Education, Projects will use the updated timeline style -->
+    <section id="experience" class="fade-in-section">
+        <div class="container">
+            <h2>Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Solving Electronic Structure Problems Using Quantum Monte-Carlo</h3>
+                        <p class="meta"><strong>Intel</strong> | March 2024 - October 2024</p>
+                        <p>Applied Quantum-assisted Quantum Monte Carlo (QQMC) with Shadow Tomography for H₂ ground state energy estimation, comparing UCCSD and Perfect Pairing trial wavefunctions for convergence and accuracy.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Flight-Gate Assignment using Quantum Computing</h3>
+                        <p class="meta"><strong>Atos-Eviden, Germany</strong> (Presented at FuT3ch Symposium) | Nov 2023 - Jan 2024</p>
+                        <p>Utilized Eviden's myQLM framework to solve the NP-hard Flight-Gate Assignment problem using a QUBO formulation with the QAOA ansatz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="fade-in-section">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="timeline">
+                 <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>M.Sc High Performance Computing & Quantum Computing</h3>
+                        <p class="meta"><strong>Deggendorf Institute of Technology, Germany</strong> | March 2023 - Present</p>
+                        <p>Specialized modules: Quantum Chemistry, Quantum Architectures.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>M.Sc Physics</h3>
+                        <p class="meta"><strong>Central University of Karnataka, India</strong> | 2019 - 2021</p>
+                        <p>GPA: 7.5/10.0. Served as Student Representative (2019 - 2021)</p>
+                        <p>Specialized modules: Computational Physics, Micro-Teaching.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>B.Sc Physics</h3>
+                        <p class="meta"><strong>St. Joseph's college, Trichy, India</strong> | 2015 - 2018</p>
+                        <p>Grade: 71.3/100.0.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="fade-in-section">
+        <div class="container">
+            <h2>Key Projects</h2>
+             <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>VQE for Electronic Structure Calculation (Intel Quantum SDK)</h3>
+                        <p class="meta">Intel Quantum Challenge 2024 | Dec 2023 - Jan 2024</p>
+                        <p class="supervisors">Supervisors: Prof. Dr. Helena Liebelt, Prof. Dr. Rui Li</p>
+                        <p>Developed a VQE-based algorithm with Intel's Hybrid Quantum Classical library for molecular ground state energy estimation, using Qubit-wise Commutation (QWC) to reduce measurement overhead.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>GAN-based Algorithm for Fast Simulations in INO-ICAL</h3>
+                        <p class="meta">M.Sc Thesis, Central University of Karnataka, India | Jan 2021 - June 2021</p>
+                        <p class="supervisors">Supervisor: Prof. Dr. Deepak Samuel</p>
+                        <p>Implemented Generative Adversarial Networks (GANs) to generate 1 GeV cosmic muon events for the INO-ICAL detector, significantly reducing simulation time while maintaining accuracy validated against GEANT4 data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Strengths Section -->
+    <section id="skills" class="fade-in-section">
+        <div class="container">
+            <h2>Technical Strengths</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Quantum Computing Platforms</h4>
+                    <p>Intel QSDK, IBM Qiskit, Eviden myQLM, Xanadu Pennylane</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Quantum Algorithms & Concepts</h4>
+                    <p>Quantum Chemistry, QMC, VQE, QAOA, QITE</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Machine Learning</h4>
+                    <p>Neural Networks, Tensorflow, PyTorch, Computer Vision, GANs</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Scientific Tools</h4>
+                    <p>GEANT4, Python (NumPy, SciPy), JIT</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Programming Languages</h4>
+                    <p>Python, C, C++</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Operating Systems & Tools</h4>
+                    <p>Windows, Linux, Git, Docker</p>
+                </div>
+                 <div class="skill-category">
+                    <h4>Documentation & Collaboration</h4>
+                    <p>Latex, Microsoft Word, Visual Studio Code, Google Colab</p>
+                </div>
+                 <div class="skill-category">
+                    <h4>Problem Solving</h4>
+                    <p>NP-hard problems, Optimization, Numerical Modeling, Quantum Error Correction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards and Recognition Section -->
+    <section id="awards" class="fade-in-section">
+        <div class="container">
+            <h2>Awards & Recognition</h2>
+            <ul>
+                <li>Research Poster: Quantum-accelerated QMC at ISC 2025, Hamburg</li>
+                <li>Poster Presentation: Quantum Assisted QMC at NHR Conference 2024, TU Darmstadt</li>
+                <li>Winner: 3rd Position, Intel Quantum Challenge 2024</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Workshops Attended Section -->
+    <section id="workshops" class="fade-in-section">
+        <div class="container">
+            <h2>Workshops & Symposiums</h2>
+            <ul>
+                <li>Intel Quantum Challenge 2024</li>
+                <li>FuT3ch Symposium 2024 (Presenter)</li>
+                <li>AI4EIC Workshops (2021 & 2022)</li>
+                <li>PyHEP Workshops (2020, 2021 & 2022)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Language Skills Section -->
+    <section id="languages" class="fade-in-section">
+        <div class="container">
+            <h2>Language Proficiency</h2>
+            <ul>
+                <li><strong>Tamil:</strong> Native</li>
+                <li><strong>English:</strong> Fluent (TOEFL 96/120)</li>
+                <li><strong>German:</strong> Working Knowledge</li>
+                <li><strong>Hindi:</strong> Working Knowledge</li>
+                <li><strong>Malayalam:</strong> Working Knowledge</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Contact Section (content remains, styling relies on FAB) -->
+    <section id="contact" class="fade-in-section">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p>I'm passionate about quantum innovation and always open to discussing new projects, collaborations, or opportunities in the field. Reach out to explore how we can work together.</p>
+            <a href="https://de.linkedin.com/in/harish-rajendran-7b5b321ab" target="_blank" class="linkedin-button">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                Harish Rajendran on LinkedIn
+            </a>
+             <a href="mailto:harish.rajendran@stud.th-deg.de" class="email-link">harish.rajendran@stud.th-deg.de</a>
+        </div>
+    </section>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <div class="fab" id="fabButton" title="Quick Menu & Contact">HR</div>
+        <div class="fab-options" id="fabOptions">
+            <a href="#profile" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Profile
+            </a>
+            <a href="#projects" title="Projects">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 6V4h-4v2h4zm5.02 3.03L17 5.01V3h-2v2.73L12.51 3.26a.5.5 0 00-.51-.01L9.27 5.01V3H7.27v2.02L5.25 7.03a.5.5 0 00-.02.51l2.48 6.91L4 17.97V21h16v-3.03l-3.73-3.52 2.48-6.91a.5.5 0 00-.02-.51zM12 15.5c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                Projects
+            </a>
+            <a href="#skills" title="Skills">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l1.4-1.4L9.4 13.8l8.4-8.4L19.2 7l-9.8 9.6zM21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 16H5V7h14v12z"/></svg>
+                Skills
+            </a>
+            <div class="fab-hr"></div>
+            <a href="https://de.linkedin.com/in/harish-rajendran-7b5b321ab" target="_blank" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                LinkedIn
+            </a>
+            <a href="mailto:harish.rajendran@stud.th-deg.de" title="Email Harish">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Email
+            </a>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container">
+            <p>© <script>document.write(new Date().getFullYear())</script> Harish Rajendran. All Rights Reserved.</p>
+             <p style="font-size: 0.8em; opacity: 0.7;">Pioneering the Quantum Frontier.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Navbar scroll effect, mobile menu, and FAB
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const fabButton = document.getElementById('fabButton');
+        const fabOptions = document.getElementById('fabOptions');
+        const contactNavLink = document.querySelector('.contact-nav-link');
+
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const isExpanded = navLinks.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+        });
+        
+        // Close mobile menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Navbar active link highlighting and FAB behavior
+        const sections = document.querySelectorAll('section');
+        const navLiAnchors = document.querySelectorAll('nav .nav-links li a');
+
+        window.addEventListener('scroll', ()=> {
+            let current = '';
+            sections.forEach( section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 2.5)) { // Adjusted threshold
+                    current = section.getAttribute('id');
+                }
+            })
+
+            navLiAnchors.forEach( a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').substring(1) === current) {
+                    a.classList.add('active');
+                }
+            });
+            
+            // If scrolled to contact section, make FAB look like contact was clicked
+            if (current === 'contact') {
+                fabButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
+            } else {
+                fabButton.innerHTML = 'HR'; // Revert to HR or default icon
+            }
+        });
+        
+        // FAB toggle
+        fabButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from bubbling to document
+            fabOptions.classList.toggle('active');
+        });
+
+        // Clicking main contact link in nav also toggles FAB options
+        if(contactNavLink) {
+            contactNavLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor jump
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                // Optionally, open FAB automatically when contact is clicked from nav
+                // setTimeout(() => { fabOptions.classList.add('active'); }, 300); // Delay to allow scroll
+            });
+        }
+
+
+        // Close FAB if clicked outside
+        document.addEventListener('click', (e) => {
+            if (fabOptions.classList.contains('active') && !fabContainer.contains(e.target)) {
+                fabOptions.classList.remove('active');
+            }
+        });
+        // Close FAB when an option is clicked
+        fabOptions.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                 setTimeout(() => { // Add a small delay to allow navigation
+                    fabOptions.classList.remove('active');
+                }, 100);
+            });
+        });
+
+
+        // Fade-in sections on scroll
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // Item more visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    // Optional: remove class if you want fade-out on scroll away
+                    // entry.target.classList.remove('is-visible');
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+
+</body>
+</html>
